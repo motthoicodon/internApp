@@ -18,6 +18,7 @@ class CreateWorksOnTable extends Migration
             $table->integer('member_id')->unsigned();
             $table->integer('project_id')->unsigned();
             $table->string('role');
+            $table->timestamps();
 
             $table->foreign('member_id')->references('id')->on('members');
             $table->foreign('project_id')->references('id')->on('projects');
