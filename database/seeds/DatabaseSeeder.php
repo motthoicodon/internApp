@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 use App\Model\Project;
 use App\Model\Member;
 use App\Model\WorksOn;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,7 +16,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
 
-        \Illuminate\Support\Facades\DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
 
         \App\User::truncate();
         Member::truncate();

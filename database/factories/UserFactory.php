@@ -29,7 +29,7 @@ $factory->define(App\Model\Project::class, function (Faker $faker) {
     return [
         'name' => $faker->text($maxNbChars = 10),
         'information' => $faker->text($maxNbChars = 300),
-        'deadline' => $faker->date($format = 'Y-m-d', $max = 'now'),
+        'deadline' => "2019-{$faker->month}-{$faker->dayOfMonth}",
         'type' => App\Model\Project::TYPES[array_rand(App\Model\Project::TYPES)],
         'status' => App\Model\Project::STATUS[array_rand(App\Model\Project::STATUS)],
     ];
