@@ -1,6 +1,20 @@
 <template>
     <div>
-        <a class="btn btn-primary pull-right">Create New Member</a>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search" name="search">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <a onclick="$('#myModal').modal();" class="btn btn-primary pull-right">Create New Member</a>
+            </div>
+        </div>
+
 
         <table class="table table-striped" style="margin-top: 20px;">
             <thead>
@@ -51,24 +65,7 @@
             </div>
         </div>
 
-        <!--
-        <div>
-
-            <span>Page {{current_page}} of {{total_page}}</span>
-
-            <ul class="pagination pull-right">
-                <li class="page-item" :class="{ disabled: !isPrev || loading }" @click="prevPage()"><a class="page-link" >Previous</a></li>
-
-                <li class="page-item"><a class="page-link" href="">1</a></li>
-                <li class="page-item"><a class="page-link" href="">2</a></li>
-                <li class="page-item"><a class="page-link" href="">3</a></li>
-
-                <li class="page-item" :class="{ disabled: !isNext || loading }" @click="nextPage()">
-                    <a class="page-link">Next</a>
-                </li>
-            </ul>
-        </div>
-        -->
+        <vue-create-member></vue-create-member>
 
     </div>
 </template>
@@ -116,6 +113,7 @@
                         })
                 }
             },
+
             prevPage: function(){
                 if(this.isPrev){
                     this.loading = true;
