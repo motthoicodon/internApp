@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use App\Model\Member;
 use Illuminate\Http\Request;
 
-class MemberController extends Controller
+class MemberController extends ApiController
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the resour xyce.
      *
      * @return \Illuminate\Http\Response
      */
@@ -16,7 +16,7 @@ class MemberController extends Controller
     {
         $members = Member::all();
 
-        return response()->json(['data' => $members], 200);
+        return $this->showAll($members);
 
     }
 
