@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Member;
 use Illuminate\Http\Request;
 
 class MemberController extends Controller
@@ -13,7 +14,10 @@ class MemberController extends Controller
      */
     public function index()
     {
-        //
+        $members = Member::all();
+
+        return response()->json(['data' => $members], 200);
+
     }
 
 
@@ -34,9 +38,9 @@ class MemberController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Member $member)
     {
-        //
+        return response()->json(['data' => $member], 200);
     }
 
 
@@ -58,8 +62,10 @@ class MemberController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Member $member)
     {
-        //
+        $member->delete();
+
+        return response()->json(['data' => $member], 200);
     }
 }
