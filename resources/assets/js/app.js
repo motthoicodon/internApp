@@ -15,7 +15,10 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+Vue.component('pagination', require('laravel-vue-pagination'));
+
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('vue-member', require('./components/Member.vue'));
 
 const app = new Vue({
     el: '#app'
