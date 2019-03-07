@@ -17,10 +17,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Project route
 Route::resource('projects', 'ProjectController',
     ['except' => ['create', 'edit']]);
 
-// member route
 Route::resource('members', 'MemberController',
     ['except' => ['create', 'edit']]);
