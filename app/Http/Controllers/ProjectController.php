@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Project;
 use Illuminate\Http\Request;
 
-class ProjectController extends Controller
+class ProjectController extends ApiController
 {
     /**
      * Display a listing of the resource.
@@ -13,6 +14,9 @@ class ProjectController extends Controller
      */
     public function index()
     {
+        $projects = Project::all();
+
+        return $this->showAll($projects);
     }
     /**
      * Store a newly created resource in storage.
@@ -29,8 +33,9 @@ class ProjectController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Project $project)
     {
+        return $this->showOne($project);
     }
     /**
      * Update the specified resource in storage.
