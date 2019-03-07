@@ -13,7 +13,6 @@ class MemberController extends Controller
      */
     public function index()
     {
-        //
     }
 
 
@@ -25,7 +24,6 @@ class MemberController extends Controller
      */
     public function store(Request $request)
     {
-        //
     }
 
     /**
@@ -36,7 +34,6 @@ class MemberController extends Controller
      */
     public function show($id)
     {
-        //
     }
 
 
@@ -49,7 +46,6 @@ class MemberController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
     }
 
     /**
@@ -60,6 +56,5 @@ class MemberController extends Controller
      */
     public function destroy($id)
     {
-        //
     }
 }
