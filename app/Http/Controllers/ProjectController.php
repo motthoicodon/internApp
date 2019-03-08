@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateProjectRequest;
+use App\Http\Requests\EditProjectRequest;
 use App\Project;
+use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ProjectController extends ApiController
 {
@@ -29,11 +33,14 @@ class ProjectController extends ApiController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request parameter comment
+     * @param  \App\Http\Requests\CreateProjectRequest $request parameter comment
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateProjectRequest $request)
     {
+        $project = $this->project->store($request);
+
+        return $this->showOne($project);
     }
     /**
      * Display the specified resource.
@@ -48,12 +55,15 @@ class ProjectController extends ApiController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Http\Requests\EditProjectRequest $request
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EditProjectRequest $request, $id)
     {
+        $project = $this->project->edit($request, $id);
+
+        return $this->showOne($project);
     }
     /**
      * Remove the specified resource from storage.
@@ -63,5 +73,8 @@ class ProjectController extends ApiController
      */
     public function destroy($id)
     {
+        $project = $this->project->remove($id);
+
+        return $this->showOne($project);
     }
 }
