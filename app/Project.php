@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Http\Request;
 
 class Project extends Model
 {
@@ -29,5 +30,24 @@ class Project extends Model
     public function getAll()
     {
         return self::all();
+    }
+
+    public function find(int $id)
+    {
+        return self::findOrFail($id);
+    }
+
+    public function store(Request $request)
+    {
+
+        $input = $request->only([
+            'name',
+            'information',
+            'deadline',
+            'type',
+            'status',
+        ]);
+
+        return self::create($input);
     }
 }

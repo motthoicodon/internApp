@@ -37,17 +37,10 @@ class ProjectController extends ApiController
      */
     public function store(CreateProjectRequest $request)
     {
-        $this->project->fill($request->only([
-            'name',
-            'information',
-            'deadline',
-            'type',
-            'status',
-        ]));
 
-        $this->project->save();
+        $project = $this->project->store($request);
 
-        return $this->showOne($this->project);
+        return $this->showOne($project);
     }
     /**
      * Display the specified resource.
