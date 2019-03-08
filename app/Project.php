@@ -24,6 +24,6 @@ class Project extends Model
 
     public function getAll()
     {
-        return Project::all();
+        return self::all();
     }
 }
