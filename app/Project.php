@@ -50,4 +50,31 @@ class Project extends Model
 
         return self::create($input);
     }
+
+    public function edit(Request $request,int $id)
+    {
+
+        $project = self::find($id);
+
+        $input = $request->only([
+            'name',
+            'information',
+            'deadline',
+            'type',
+            'status',
+        ]);
+
+        $project->fill($input);
+
+        $project->save();
+
+        return $project;
+    }
+
+    public function remove($id){
+        $project = $this->project->find($id);
+        $project->delete();
+        return $project;
+    }
+
 }
