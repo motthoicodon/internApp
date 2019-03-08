@@ -2,10 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Project;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
-class ProjectController extends Controller
+class ProjectController extends ApiController
 {
+    private $project;
+
+    public function __construct(Project $project)
+    {
+        $this->project = $project;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,6 +22,9 @@ class ProjectController extends Controller
      */
     public function index()
     {
+        $projects = $this->project->getAll();
+
+        return $this->showAll($projects);
     }
     /**
      * Store a newly created resource in storage.
@@ -29,8 +41,9 @@ class ProjectController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Project $project)
     {
+        return $this->showOne($project);
     }
     /**
      * Update the specified resource in storage.

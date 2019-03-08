@@ -21,4 +21,9 @@ class Project extends Model
     {
         return $this->belongsToMany('App\Member', 'works_on');
     }
+
+    public function getAll()
+    {
+        return self::all();
+    }
 }
