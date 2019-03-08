@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class ProjectController extends ApiController
 {
-    protected $project;
+    private $project;
 
     public function __construct(Project $project)
     {
