@@ -51,7 +51,7 @@ class Project extends Model
         return self::create($input);
     }
 
-    public function edit(Request $request,int $id)
+    public function edit(Request $request, int $id)
     {
 
         $project = self::find($id);
@@ -71,10 +71,10 @@ class Project extends Model
         return $project;
     }
 
-    public function remove($id){
+    public function remove($id)
+    {
         $project = $this->project->find($id);
         $project->delete();
         return $project;
     }
-
 }
