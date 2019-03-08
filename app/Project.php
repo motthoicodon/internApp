@@ -9,6 +9,10 @@ class Project extends Model
 {
     use SoftDeletes;
 
+    const TYPES = ['lab','single','acceptance'];
+
+    const STATUS = ['planned','onhold','doing','done','cancelled'];
+
     protected $fillable = [
         'name',
         'information',

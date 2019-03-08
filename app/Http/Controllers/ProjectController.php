@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateProjectRequest;
 use App\Project;
+use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ProjectController extends ApiController
 {
@@ -29,11 +32,22 @@ class ProjectController extends ApiController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request parameter comment
+     * @param  \App\Http\Requests\CreateProjectRequest $request parameter comment
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateProjectRequest $request)
     {
+        $this->project->fill($request->only([
+            'name',
+            'information',
+            'deadline',
+            'type',
+            'status',
+        ]));
+
+        $this->project->save();
+
+        return $this->showOne($this->project);
     }
     /**
      * Display the specified resource.

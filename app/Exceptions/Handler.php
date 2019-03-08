@@ -6,6 +6,8 @@ use App\Traits\ApiResponser;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Response;
+use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
@@ -59,6 +61,10 @@ class Handler extends ExceptionHandler
             $modelName = class_basename($exception->getModel());
             return $this->errorResponse("Does not exists any {$modelName} with the specified indentificator", 404);
         }
+        if ($exception instanceof ValidationException) {
+            return $this->errorResponse($exception->errors(), Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
 
         return parent::render($request, $exception);
     }
