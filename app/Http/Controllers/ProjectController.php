@@ -3,10 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Project;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 class ProjectController extends ApiController
 {
+    protected $project;
+
+    public function __construct(Project $project)
+    {
+        $this->project = $project;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +22,7 @@ class ProjectController extends ApiController
      */
     public function index()
     {
-        $projects = Project::all();
+        $projects = $this->project->getAll();
 
         return $this->showAll($projects);
     }
