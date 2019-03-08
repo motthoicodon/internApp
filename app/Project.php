@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 
 class Project extends Model
 {
@@ -25,6 +26,11 @@ class Project extends Model
     public function members()
     {
         return $this->belongsToMany('App\Member', 'works_on');
+    }
+
+    public function workson()
+    {
+        return $this->hasMany(WorksOn::class);
     }
 
     public function getAll()
@@ -73,8 +79,21 @@ class Project extends Model
 
     public function remove($id)
     {
-        $project = $this->project->find($id);
+        $project = $this->find($id);
+
+        if (count($project->workson) > 0) {
+            $this->deleteWorksOn($project->workson);
+        }
+
         $project->delete();
+
         return $project;
+    }
+
+    protected function deleteWorksOn(Collection $collection)
+    {
+        foreach ($collection as $item) {
+            $item->delete();
+        }
     }
 }
