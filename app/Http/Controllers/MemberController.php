@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateMemberRequest;
+use App\Http\Requests\EditMemberRequest;
 use App\Member;
 use Illuminate\Http\Request;
 
@@ -55,12 +56,15 @@ class MemberController extends ApiController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\EditMemberRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EditMemberRequest $request, $id)
     {
+        $member = $this->member->edit($request, $id);
+
+        return $this->showOne($member);
     }
 
     /**
@@ -71,5 +75,8 @@ class MemberController extends ApiController
      */
     public function destroy($id)
     {
+        $member = $this->member->remove($id);
+
+        return $this->showOne($member);
     }
 }
