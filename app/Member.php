@@ -57,7 +57,7 @@ class Member extends Model
             'gender'
         ]);
 
-        if ($request->avatar != null) {
+        if ($request->avatar !== null) {
             $input['avatar'] = $request->avatar->store('');
         }
         return self::create($input);
@@ -78,7 +78,7 @@ class Member extends Model
 
         $member->fill($input);
 
-        if ($request->hasFile('avatar') != null) {
+        if ($request->hasFile('avatar')) {
             Storage::delete($member->avatar);
 
             $member->avatar = $request->avatar->store('');
@@ -93,11 +93,11 @@ class Member extends Model
     {
         $member = $this->find($id);
 
-        if (count($member->workson) > 0) {
+        if (!$member->workson->isEmpty()) {
             $this->deleteWorksOn($member->workson);
         }
 
-        if ($member->avatar != null) {
+        if ($member->avatar !== null) {
             Storage::delete($member->avatar);
         }
 
