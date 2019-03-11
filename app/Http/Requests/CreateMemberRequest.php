@@ -35,5 +35,4 @@ class CreateMemberRequest extends FormRequest
             'gender'      => 'required|in:' . implode(',', Member::GENDERS),
         ];
     }
-
 }

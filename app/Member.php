@@ -43,7 +43,8 @@ class Member extends Model
         return self::findOrFail($id);
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $input = $request->only([
             'name',
             'information',
@@ -54,10 +55,9 @@ class Member extends Model
             'gender'
         ]);
 
-        if($request->avatar != null){
+        if ($request->avatar != null) {
             $input['avatar'] = $request->avatar->store('');
         }
         return self::create($input);
     }
-
 }

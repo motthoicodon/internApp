@@ -30,7 +30,7 @@ class DateOfBirth implements Rule
         $date = DateTime::createFromFormat("Y/m/d", $value);
         $year = $date->format("Y");
 
-        if(($year + 60) >= $currentYear){
+        if (($year + 60) >= $currentYear) {
             return true;
         }
     }
