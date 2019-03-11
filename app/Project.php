@@ -12,7 +12,6 @@ class Project extends Model
     use SoftDeletes;
 
     const TYPES = ['lab','single','acceptance'];
-
     const STATUS = ['planned','onhold','doing','done','cancelled'];
 
     protected $fillable = [
@@ -45,7 +44,6 @@ class Project extends Model
 
     public function store(Request $request)
     {
-
         $input = $request->only([
             'name',
             'information',
