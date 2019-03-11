@@ -57,7 +57,7 @@ class Member extends Model
             'gender'
         ]);
 
-        if ($request->avatar !== null) {
+        if ($request->hasFile('avatar')) {
             $input['avatar'] = $request->avatar->store('');
         }
         return self::create($input);
