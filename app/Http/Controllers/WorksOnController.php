@@ -29,7 +29,7 @@ class WorksOnController extends ApiController
         $project = Project::findOrFail($request->project_id);
 
         if ($project->isExistMember($member)) {
-            return $this->errorResponse('The member has been assigned into this project', 500);
+            return $this->errorResponse('The member has been assigned into this project', 422);
         }
 
         $workson = $this->worksOn->store($request);

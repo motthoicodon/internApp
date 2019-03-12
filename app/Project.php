@@ -98,10 +98,10 @@ class Project extends Model
     public function isExistMember(Member $member)
     {
 
-        $countMember = $this->members()
+        $member = $this->members()
                             ->where('member_id', $member->id)
-                            ->count();
+                            ->get();
 
-        return  $countMember !== 0;
+        return  !$member->isEmpty();
     }
 }
