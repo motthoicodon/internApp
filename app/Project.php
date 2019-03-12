@@ -104,16 +104,4 @@ class Project extends Model
 
         return  $countMember !== 0;
     }
-
-    public function storeMemberWorksOn(Request $request, Member $member)
-    {
-        $input = $request->only([
-            'role'
-        ]);
-
-        $input['project_id'] = $this->id;
-        $input['member_id'] = $member->id;
-
-        return WorksOn::create($input);
-    }
 }
