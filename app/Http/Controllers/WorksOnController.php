@@ -32,7 +32,7 @@ class WorksOnController extends ApiController
             return $this->errorResponse('The member has been assigned into this project', 500);
         }
 
-        $workson = WorksOn::create($request->all());
+        $workson = $this->worksOn->store($request);
         return $this->showOne($workson);
     }
 

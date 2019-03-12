@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Http\Request;
 
 class WorksOn extends Model
 {
@@ -26,5 +27,16 @@ class WorksOn extends Model
     public function project()
     {
         return $this->belongsTo('App\Project');
+    }
+
+    public function store(Request $request)
+    {
+        $input = $request->only([
+            'role',
+            'project_id',
+            'member_id',
+        ]);
+
+        return self::create($input);
     }
 }
