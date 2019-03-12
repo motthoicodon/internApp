@@ -94,4 +94,14 @@ class Project extends Model
             $item->delete();
         }
     }
+
+    public function isExistMember(Member $member)
+    {
+
+        $member = $this->members()
+                            ->where('member_id', $member->id)
+                            ->get();
+
+        return  !$member->isEmpty();
+    }
 }

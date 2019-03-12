@@ -17,8 +17,20 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('projects', 'ProjectController',
-    ['except' => ['create', 'edit']]);
+Route::resource(
+    'projects',
+    'ProjectController',
+    ['except' => ['create', 'edit']]
+);
 
-Route::resource('members', 'MemberController',
-    ['except' => ['create', 'edit']]);
+Route::resource(
+    'members',
+    'MemberController',
+    ['except' => ['create', 'edit']]
+);
+
+Route::resource(
+    'workson',
+    'WorksOnController',
+    ['only' => ['store']]
+);
