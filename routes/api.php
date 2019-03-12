@@ -22,3 +22,6 @@ Route::resource('projects', 'ProjectController',
 
 Route::resource('members', 'MemberController',
     ['except' => ['create', 'edit']]);
+
+Route::resource('workson', 'WorksOnController',
+    ['only' => ['store']]);
