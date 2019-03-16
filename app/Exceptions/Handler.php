@@ -2,11 +2,17 @@
 
 namespace App\Exceptions;
 
+use App\Traits\ApiResponser;
 use Exception;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Response;
+use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
+    use ApiResponser;
     /**
      * A list of the exception types that are not reported.
      *
@@ -48,6 +54,18 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($exception instanceof NotFoundHttpException) {
+            return $this->errorResponse('The specified URL cannot be found', 404);
+        }
+        if ($exception instanceof ModelNotFoundException) {
+            $modelName = class_basename($exception->getModel());
+            return $this->errorResponse("Does not exists any {$modelName} with the specified indentificator", 404);
+        }
+        if ($exception instanceof ValidationException) {
+            return $this->errorResponse($exception->errors(), Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+
         return parent::render($request, $exception);
     }
 }

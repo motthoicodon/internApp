@@ -2,34 +2,43 @@
 
 namespace App\Http\Controllers;
 
-use App\Model\Member;
+use App\Http\Requests\CreateMemberRequest;
+use App\Http\Requests\EditMemberRequest;
+use App\Member;
 use Illuminate\Http\Request;
 
 class MemberController extends ApiController
 {
+
+    private $member;
+
+    public function __construct(Member $member)
+    {
+        $this->member = $member;
+    }
+
     /**
-     * Display a listing of the resour xyce.
+     * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $members = Member::all();
-
+        $members = $this->member->getAll();
         return $this->showAll($members);
-
     }
 
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\CreateMemberRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateMemberRequest $request)
     {
-        //
+        $member = $this->member->store($request);
+        return $this->showOne($member);
     }
 
     /**
@@ -38,22 +47,25 @@ class MemberController extends ApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Member $member)
+    public function show($id)
     {
-        return response()->json(['data' => $member], 200);
+        $member = $this->member->find($id);
+        return $this->showOne($member);
     }
 
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\EditMemberRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EditMemberRequest $request, $id)
     {
-        //
+        $member = $this->member->edit($request, $id);
+
+        return $this->showOne($member);
     }
 
     /**
@@ -62,10 +74,10 @@ class MemberController extends ApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Member $member)
+    public function destroy($id)
     {
-        $member->delete();
+        $member = $this->member->remove($id);
 
-        return response()->json(['data' => $member], 200);
+        return $this->showOne($member);
     }
 }

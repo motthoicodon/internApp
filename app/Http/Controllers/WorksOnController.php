@@ -2,73 +2,38 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateWorksOnRequest;
+use App\Member;
+use App\Project;
+use App\WorksOn;
 use Illuminate\Http\Request;
 
-class WorksOnController extends Controller
+class WorksOnController extends ApiController
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
+    private $worksOn;
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function __construct(WorksOn $worksOn)
     {
-        //
+        $this->worksOn = $worksOn;
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\CreateWorksOnRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateWorksOnRequest $request)
     {
-        //
-    }
+        $member = Member::findOrFail($request->member_id);
+        $project = Project::findOrFail($request->project_id);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+        if ($project->isExistMember($member)) {
+            return $this->errorResponse('The member has been assigned into this project', 422);
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        $workson = $this->worksOn->store($request);
+        return $this->showOne($workson);
     }
 
     /**

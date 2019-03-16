@@ -6,6 +6,7 @@ use App\Model\Member;
 use App\Model\WorksOn;
 use Illuminate\Support\Facades\DB;
 
+// @codingStandardsIgnoreLine
 class DatabaseSeeder extends Seeder
 {
     /**
