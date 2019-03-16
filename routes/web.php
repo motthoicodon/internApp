@@ -14,3 +14,6 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/admin/members' , 'AdminController@showMember');
+Route::get('/admin/projects' , 'AdminController@showProject');
