@@ -5,9 +5,8 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class CreateMemberTest extends TestCase
+class MemberCreateTest extends TestCase
 {
     /**
      * A basic test example.
@@ -50,15 +49,15 @@ class CreateMemberTest extends TestCase
         $response = $this->postJson('/api/members', $data);
 
         $response->assertStatus(422)
-                ->assertJson([
-                    'error'=>[
-                        'name'=> ['The name field is required.'],
-                        'phone'=>['The phone field is required.'],
-                        'birthday'=>['The birthday field is required.'],
-                        'gender'=>['The gender field is required.'],
-                        'position'=>['The position field is required.'],
-                    ]
-                ]);
+            ->assertJson([
+                'error'=>[
+                    'name'=> ['The name field is required.'],
+                    'phone'=>['The phone field is required.'],
+                    'birthday'=>['The birthday field is required.'],
+                    'gender'=>['The gender field is required.'],
+                    'position'=>['The position field is required.'],
+                ]
+            ]);
 
     }
 
@@ -75,14 +74,14 @@ class CreateMemberTest extends TestCase
         $response = $this->postJson('/api/members', $data);
 
         $response->assertStatus(422)
-                ->assertJson([
-                   'error' => [
-                       'name' => ['The name may not be greater than 50 characters.'],
-                       'information' => ['The information may not be greater than 300 characters.'],
-                       'phone' => ['The phone may not be greater than 20 characters.'],
-                       'birthday' => ['The birthday must be a date after 1959-01-01.'],
-                   ]
-                ]);
+            ->assertJson([
+                'error' => [
+                    'name' => ['The name may not be greater than 50 characters.'],
+                    'information' => ['The information may not be greater than 300 characters.'],
+                    'phone' => ['The phone may not be greater than 20 characters.'],
+                    'birthday' => ['The birthday must be a date after 1959-01-01.'],
+                ]
+            ]);
     }
 
     public function test_invalid_typing_input_field_name_phone_and_birthday(){
@@ -97,14 +96,14 @@ class CreateMemberTest extends TestCase
         $response = $this->postJson('/api/members', $data);
 
         $response->assertStatus(422)
-                ->assertJson([
-                   'error' => [
-                       'name' => ['The name format is invalid.'],
-                       'phone' => ['The phone format is invalid.'],
-                       'birthday' => ['The birthday does not match the format Y/m/d.',
-                                        'The birthday must be a date before today.',
-                                        'The birthday must be a date after 1959-01-01.'],
-                   ]
-                ]);
+            ->assertJson([
+                'error' => [
+                    'name' => ['The name format is invalid.'],
+                    'phone' => ['The phone format is invalid.'],
+                    'birthday' => ['The birthday does not match the format Y/m/d.',
+                        'The birthday must be a date before today.',
+                        'The birthday must be a date after 1959-01-01.'],
+                ]
+            ]);
     }
 }
