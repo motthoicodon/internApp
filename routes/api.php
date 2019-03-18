@@ -34,3 +34,9 @@ Route::resource(
     'WorksOnController',
     ['only' => ['store']]
 );
+
+Route::resource(
+    'projects.members',
+    'ProjectMemberController',
+    ['only' => ['index', 'destroy']]
+);
