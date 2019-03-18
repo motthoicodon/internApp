@@ -15,7 +15,6 @@ window.Vue = require('vue');
  */
 
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('vue-member', require('./components/Member.vue'));
 Vue.component('vue-create-member', require('./components/children/CreateNewMember.vue'));
 
