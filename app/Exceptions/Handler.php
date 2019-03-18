@@ -5,6 +5,7 @@ namespace App\Exceptions;
 use App\Traits\ApiResponser;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
@@ -63,6 +64,10 @@ class Handler extends ExceptionHandler
         }
         if ($exception instanceof ValidationException) {
             return $this->errorResponse($exception->errors(), Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+        if($exception instanceof QueryException){
+            return $this->errorResponse($exception->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
 

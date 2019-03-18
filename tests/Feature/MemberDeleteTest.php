@@ -9,7 +9,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class MemberDeleteTest extends TestCase
 {
-    use WithFaker;
     /**
      * A basic test example.
      *
