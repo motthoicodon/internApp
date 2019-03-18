@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 
 class WorksOn extends Model
 {
-    use SoftDeletes;
 
     protected $table = 'works_on';
 

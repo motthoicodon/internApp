@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Storage;
 
 class Member extends Model
 {
-    use SoftDeletes;
 
     const POSITIONS = ['intern','junior','senior','pm','ceo','cto','bo'];
     const GENDERS = ['male','female'];
@@ -92,10 +91,6 @@ class Member extends Model
     public function remove($id)
     {
         $member = $this->find($id);
-
-        if (!$member->workson->isEmpty()) {
-            $this->deleteWorksOn($member->workson);
-        }
 
         if ($member->avatar !== null) {
             Storage::delete($member->avatar);

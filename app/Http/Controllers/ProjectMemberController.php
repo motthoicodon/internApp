@@ -26,12 +26,36 @@ class ProjectMemberController extends ApiController
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Member $member
+     * @param  \App\Project $project
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Member $member)
+    public function store(Request $request, Project $project)
     {
-        //
+        $rules = [
+            'member_id' => 'required|exists:members,id',
+            'role' => 'required|in:' . implode(',', WorksOn::ROLES),
+        ];
+
+        $this->validate($request, $rules);
+
+        $input = $request->only([
+            'member_id',
+            'role'
+        ]);
+
+
+        $input['project_id'] = $project->id;
+
+        $member = Member::findOrFail($input['member_id']);
+
+        if ($project->isExistMember($member)) {
+            return $this->errorResponse('The member has been assigned into this project', 422);
+        }
+
+        $worksOn = WorksOn::create($input);
+
+        return $this->showOne($worksOn);
+
     }
 
     public function update(Request $request, $id)

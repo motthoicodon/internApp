@@ -38,5 +38,5 @@ Route::resource(
 Route::resource(
     'projects.members',
     'ProjectMemberController',
-    ['only' => ['index', 'destroy']]
+    ['only' => ['index', 'destroy', 'store']]
 );
