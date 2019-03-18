@@ -43,11 +43,10 @@ class MemberEditTest extends TestCase
                        'phone'=> '123456789',
                    ]
                 ]);
-
-
     }
 
-    public function test_it_returns_appropriate_field_validation_errors_when_updating_the_member_with_invalid_inputs(){
+    public function test_it_returns_appropriate_field_validation_errors_when_updating_the_member_with_invalid_inputs()
+    {
 
         $member = Member::create([
             'name'=> $this->faker->userName,

@@ -24,7 +24,8 @@ class ProjectReadTest extends TestCase
             ]);
     }
 
-    public function test_can_list_projects(){
+    public function test_can_list_projects()
+    {
 
         $projects = factory(Project::class, 2)->create();
 
@@ -47,10 +48,10 @@ class ProjectReadTest extends TestCase
                     ],
                 ]
             ]);
-
     }
 
-    public function test_can_get_project_specify_by_id(){
+    public function test_can_get_project_specify_by_id()
+    {
 
         $projects = factory(Project::class, 3)->create();
 
@@ -65,6 +66,5 @@ class ProjectReadTest extends TestCase
                     'status'=> $projects[0]->status,
                 ]
             ]);
-
     }
 }

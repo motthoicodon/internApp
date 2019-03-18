@@ -35,7 +35,8 @@ class ProjectCreateTest extends TestCase
                 ]);
     }
 
-    public function test_no_input_typing_when_create_a_new_project(){
+    public function test_no_input_typing_when_create_a_new_project()
+    {
         $data = [
             'name' => '',
             'deadline' => '',
@@ -54,10 +55,10 @@ class ProjectCreateTest extends TestCase
                     'status'=>['The status field is required.'],
                 ]
             ]);
-
     }
 
-    public function test_exceeding_limit_of_length_input_field(){
+    public function test_exceeding_limit_of_length_input_field()
+    {
         $data = [
             'name' => 'abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234a',
             'information' => 'abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234a',
@@ -83,7 +84,8 @@ class ProjectCreateTest extends TestCase
             ]);
     }
 
-    public function test_invalid_typing_input_field_name_type_and_status(){
+    public function test_invalid_typing_input_field_name_type_and_status()
+    {
         $data = [
             'name' => 'abcd@',
             'type' => 'maleasd',

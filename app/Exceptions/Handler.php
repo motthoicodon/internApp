@@ -67,11 +67,11 @@ class Handler extends ExceptionHandler
             return $this->errorResponse($exception->errors(), Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
-        if($exception instanceof QueryException){
+        if ($exception instanceof QueryException) {
             return $this->errorResponse($exception->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
-        if($exception instanceof MethodNotAllowedHttpException){
+        if ($exception instanceof MethodNotAllowedHttpException) {
             return $this->errorResponse('The specified method for the requests is invalid', 405);
         }
 
