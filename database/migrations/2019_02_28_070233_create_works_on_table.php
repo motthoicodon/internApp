@@ -19,10 +19,11 @@ class CreateWorksOnTable extends Migration
             $table->integer('project_id')->unsigned();
             $table->string('role');
             $table->timestamps();
-            $table->softDeletes();
 
-            $table->foreign('member_id')->references('id')->on('members');
-            $table->foreign('project_id')->references('id')->on('projects');
+            $table->foreign('member_id')->references('id')
+                                ->on('members');
+            $table->foreign('project_id')->references('id')
+                                ->on('projects');
         });
     }
 

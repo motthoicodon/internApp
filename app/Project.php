@@ -9,7 +9,6 @@ use Illuminate\Support\Collection;
 
 class Project extends Model
 {
-    use SoftDeletes;
 
     const TYPES = ['lab','single','acceptance'];
     const STATUS = ['planned','onhold','doing','done','cancelled'];

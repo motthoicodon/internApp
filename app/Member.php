@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Storage;
 
 class Member extends Model
 {
-    use SoftDeletes;
 
     const POSITIONS = ['intern','junior','senior','pm','ceo','cto','bo'];
     const GENDERS = ['male','female'];
