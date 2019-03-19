@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 class MemberController extends ApiController
 {
+
     private $member;
 
     public function __construct(Member $member)
