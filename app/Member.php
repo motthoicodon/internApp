@@ -92,10 +92,6 @@ class Member extends Model
     {
         $member = $this->find($id);
 
-        if (!$member->workson->isEmpty()) {
-            $this->deleteWorksOn($member->workson);
-        }
-
         if ($member->avatar !== null) {
             Storage::delete($member->avatar);
         }

@@ -5,9 +5,11 @@ namespace App\Exceptions;
 use App\Traits\ApiResponser;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
@@ -65,6 +67,15 @@ class Handler extends ExceptionHandler
             return $this->errorResponse($exception->errors(), Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
+        if ($exception instanceof QueryException) {
+            return $this->errorResponse($exception->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+
+        if ($exception instanceof MethodNotAllowedHttpException) {
+            return $this->errorResponse('The specified method for the requests is invalid', 405);
+        }
+
+        return $this->errorResponse('Unexpected Exception', 409);
 
         return parent::render($request, $exception);
     }

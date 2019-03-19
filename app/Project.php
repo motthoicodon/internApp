@@ -78,10 +78,6 @@ class Project extends Model
     {
         $project = $this->find($id);
 
-        if (count($project->workson) > 0) {
-            $this->deleteWorksOn($project->workson);
-        }
-
         $project->delete();
 
         return $project;

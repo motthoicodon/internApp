@@ -29,7 +29,7 @@ class EditMemberRequest extends FormRequest
             'name' => ['required','max:50','regex:/^[a-zA-Z0-9-.\s]*$/'],
             'information' => 'max:300',
             'phone' => ['required','max:20','regex:/^[0-9()-.+\s\/]*$/'],
-            'birthday' => ['required','date_format:"Y/m/d"','before:today', new DateOfBirth()],
+            'birthday' => 'required|date_format:"Y/m/d"|before:today|after:1959-01-01',
             'avatar' => 'file|image|max:10240',
             'position'      => 'required|in:' . implode(',', Member::POSITIONS),
             'gender'      => 'required|in:' . implode(',', Member::GENDERS),
