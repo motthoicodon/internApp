@@ -20,7 +20,6 @@ trait ApiResponser
 
     protected function showAll(Collection $collection, $code = 200)
     {
-        $collection = $this->paginate($collection);
         return $this->successResponse(['data' => $collection], $code);
     }
 
@@ -29,20 +28,4 @@ trait ApiResponser
         return $this->successResponse(['data' => $model], $code);
     }
 
-    protected function paginate(Collection $collection){
-
-        $page = LengthAwarePaginator::resolveCurrentPage();
-
-        $perPage = 10;
-
-        $result = $collection->slice(($page - 1) * $perPage, $perPage)->values();
-
-        $paginated = new LengthAwarePaginator($result, $collection->count(), $perPage, $page, [
-            'path' => LengthAwarePaginator::resolveCurrentPath()
-        ]);
-
-        $paginated->appends(request()->all());
-
-        return $paginated;
-    }
 }

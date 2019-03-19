@@ -79,7 +79,7 @@
             axios.get('/api/members')
                 .then(resp => {
                     console.log("Member Component: Call back function after call AJAX get all members");
-                    this.members = resp.data.data.data;
+                    this.members = resp.data.data;
                     this.total_page = resp.data.data.last_page;
                 })
                 .catch(e => {

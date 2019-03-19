@@ -44859,7 +44859,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/api/members').then(function (resp) {
             console.log("Member Component: Call back function after call AJAX get all members");
-            _this.members = resp.data.data.data;
+            _this.members = resp.data.data;
             _this.total_page = resp.data.data.last_page;
         }).catch(function (e) {});
     },
