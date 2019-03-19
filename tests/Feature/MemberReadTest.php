@@ -25,7 +25,8 @@ class MemberReadTest extends TestCase
                 ]);
     }
 
-    public function test_can_list_members(){
+    public function test_can_list_members()
+    {
 
         $members = factory(Member::class, 2)->create();
 
@@ -48,10 +49,10 @@ class MemberReadTest extends TestCase
                         ],
                     ]
                  ]);
-
     }
 
-    public function test_can_get_member_specify_by_id(){
+    public function test_can_get_member_specify_by_id()
+    {
 
         $members = factory(Member::class, 3)->create();
 
@@ -66,6 +67,5 @@ class MemberReadTest extends TestCase
                        'gender'=> $members[0]->gender,
                    ]
                 ]);
-
     }
 }

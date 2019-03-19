@@ -27,6 +27,5 @@ class ProjectDeleteTest extends TestCase
         $response = $this->getJson("/api/projects/{$project->id}");
 
         $response->assertStatus(404);
-
     }
 }

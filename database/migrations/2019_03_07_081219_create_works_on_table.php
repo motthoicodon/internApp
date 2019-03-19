@@ -22,7 +22,6 @@ class CreateWorksOnTable extends Migration
             $table->timestamps();
             $table->foreign('member_id')->references('id')->on('members');
             $table->foreign('project_id')->references('id')->on('projects');
-            $table->softDeletes();
         });
     }
 

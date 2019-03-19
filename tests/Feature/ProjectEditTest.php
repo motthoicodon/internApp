@@ -36,10 +36,10 @@ class ProjectEditTest extends TestCase
                         'status'    =>  'cancelled',
                     ]
                 ]);
-
     }
 
-    public function test_it_returns_appropriate_field_validation_errors_when_updating_the_project_with_invalid_inputs(){
+    public function test_it_returns_appropriate_field_validation_errors_when_updating_the_project_with_invalid_inputs()
+    {
 
         $projects = factory(Project::class, 3)->create();
 

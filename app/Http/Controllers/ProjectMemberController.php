@@ -55,7 +55,6 @@ class ProjectMemberController extends ApiController
         $worksOn = WorksOn::create($input);
 
         return $this->showOne($worksOn);
-
     }
 
     public function update(Request $request, $id)

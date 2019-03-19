@@ -37,10 +37,10 @@ class WorksOnTest extends TestCase
                         'project_id' => $project->id
                     ]
                 ]);
-
     }
 
-    public function test_assign_invalid_members_to_projects(){
+    public function test_assign_invalid_members_to_projects()
+    {
         $projects = factory(Project::class, 3)->create();
         $members = factory(Member::class, 3)->create();
 
@@ -61,7 +61,8 @@ class WorksOnTest extends TestCase
             ]);
     }
 
-    public function test_assign_members_to_projects_with_invalid_role(){
+    public function test_assign_members_to_projects_with_invalid_role()
+    {
         $projects = factory(Project::class, 3)->create();
         $members = factory(Member::class, 3)->create();
 
@@ -82,7 +83,8 @@ class WorksOnTest extends TestCase
             ]);
     }
 
-    public function test_assign_members_to_invalid_projects(){
+    public function test_assign_members_to_invalid_projects()
+    {
         $projects = factory(Project::class, 3)->create();
         $members = factory(Member::class, 3)->create();
 

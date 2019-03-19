@@ -24,7 +24,6 @@ class CreateMembersTable extends Migration
             $table->string('position');
             $table->string('gender');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
