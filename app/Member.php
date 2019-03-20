@@ -56,7 +56,10 @@ class Member extends Model
         ]);
 
         if ($request->hasFile('avatar')) {
-            $input['avatar'] = $request->avatar->store('');
+            $input['avatar'] = $request->file('avatar')->storeAs(
+                'avatars',
+                str_slug($input['name']) . '.' . $request->file('avatar')->getClientOriginalExtension()
+            );
         }
         return self::create($input);
     }
