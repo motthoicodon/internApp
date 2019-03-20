@@ -27,7 +27,7 @@ class CreateProjectRequest extends FormRequest
         return [
             'name' => ['required','max:10','regex:/^[a-zA-Z0-9-.\s]*$/'],
             'information' => 'max:300',
-            'deadline' => 'nullable|date_format:"Y/m/d"',
+            'deadline' => 'nullable|date_format:"Y/m/d"|after:today',
             'type'      => 'required|in:' . implode(',', Project::TYPES),
             'status'      => 'required|in:' . implode(',', Project::STATUS),
         ];

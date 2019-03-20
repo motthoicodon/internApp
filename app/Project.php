@@ -9,8 +9,6 @@ use Illuminate\Support\Collection;
 
 class Project extends Model
 {
-    use SoftDeletes;
-
     const TYPES = ['lab','single','acceptance'];
     const STATUS = ['planned','onhold','doing','done','cancelled'];
 
@@ -78,10 +76,6 @@ class Project extends Model
     public function remove($id)
     {
         $project = $this->find($id);
-
-        if (count($project->workson) > 0) {
-            $this->deleteWorksOn($project->workson);
-        }
 
         $project->delete();
 
