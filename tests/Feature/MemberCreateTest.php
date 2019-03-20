@@ -61,7 +61,7 @@ class MemberCreateTest extends TestCase
             ]);
     }
 
-    public function testExceedingLimitOfLengthInputField()
+    public function testExceedingLimitOfLengthOfAllInputFieldOfMember()
     {
         $data = [
             'name' => 'abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234a',

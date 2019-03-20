@@ -29,9 +29,5 @@ class MemberDeleteTest extends TestCase
         $response->assertStatus(200);
 
         $this->assertDatabaseMissing('members', ['id'=>$member->id]);
-
-        $uri = "/api/members/{$member->id}";
-
-        $this->return404WhenSendGetJsonRequest($uri);
     }
 }

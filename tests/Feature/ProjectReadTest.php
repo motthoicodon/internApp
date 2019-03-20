@@ -67,4 +67,15 @@ class ProjectReadTest extends TestCase
                 ]
             ]);
     }
+
+    public function testItReturns404NotFoundWhenGetInvalidProjects()
+    {
+        $id = 1000;
+        $response = $this->getJson("api/projects/{$id}");
+        $response->assertStatus(404)
+            ->assertJson([
+                'error' => 'Does not exists any Project with the specified indentificator',
+                'code'  => 404
+            ]);
+    }
 }

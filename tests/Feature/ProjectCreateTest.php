@@ -57,7 +57,7 @@ class ProjectCreateTest extends TestCase
             ]);
     }
 
-    public function testExceedingLimitOfLengthInputField()
+    public function testExceedingLimitOfLengthInputFieldOfProject()
     {
         $data = [
             'name' => 'abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234a',

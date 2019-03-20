@@ -9,7 +9,6 @@ use Illuminate\Support\Collection;
 
 class Project extends Model
 {
-
     const TYPES = ['lab','single','acceptance'];
     const STATUS = ['planned','onhold','doing','done','cancelled'];
 

@@ -27,7 +27,6 @@ class MemberReadTest extends TestCase
 
     public function testCanListMembers()
     {
-
         $members = factory(Member::class, 2)->create();
 
         $response = $this->getJson('/api/members');
@@ -53,7 +52,6 @@ class MemberReadTest extends TestCase
 
     public function testCanGetMemberSpecifyById()
     {
-
         $members = factory(Member::class, 3)->create();
 
         $response= $this->get("api/members/{$members[0]->id}");
@@ -66,6 +64,17 @@ class MemberReadTest extends TestCase
                        'position'=> $members[0]->position,
                        'gender'=> $members[0]->gender,
                    ]
+                ]);
+    }
+
+    public function testItReturns404NotFoundWhenGetInvalidMember()
+    {
+        $id = 1000;
+        $response = $this->getJson("api/members/{$id}");
+        $response->assertStatus(404)
+                ->assertJson([
+                    'error' => 'Does not exists any Member with the specified indentificator',
+                    'code'  => 404
                 ]);
     }
 }

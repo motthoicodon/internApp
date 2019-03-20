@@ -25,9 +25,5 @@ class ProjectDeleteTest extends TestCase
         $response->assertStatus(200);
 
         $this->assertDatabaseMissing('projects', ['id'=>$project->id]);
-
-        $uri = "/api/projects/{$project->id}";
-
-        $this->return404WhenSendGetJsonRequest($uri);
     }
 }

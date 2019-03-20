@@ -46,7 +46,7 @@ class ProjectEditTest extends TestCase
         $project = $projects[0];
 
         $data = [
-            'name'  => null,
+            'name'  => '',
             'type'  => '',
             'status'=>  '',
         ];
