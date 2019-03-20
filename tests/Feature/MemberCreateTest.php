@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use Illuminate\Support\Str;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -64,9 +65,9 @@ class MemberCreateTest extends TestCase
     public function testExceedingLimitOfLengthOfAllInputFieldOfMember()
     {
         $data = [
-            'name' => 'abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234a',
-            'information' => 'abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234a',
-            'phone' => '096419196509641919651',
+            'name' => Str::random(51),
+            'information' => Str::random(301),
+            'phone' => '1234567890-1234567890',
             'birthday' => '1958/02/19',
             'gender' => 'male',
             'position' => 'junior',
@@ -83,6 +84,36 @@ class MemberCreateTest extends TestCase
                     'birthday' => ['The birthday must be a date after 1959-01-01.'],
                 ]
             ]);
+    }
+
+    public function testSuccessfullyCreatingMemberWithLimitOfLengthOfInformationPhoneAndName()
+    {
+
+        $memberInfo = Str::random(300);
+        $memberName = Str::random(50);
+
+        $data = [
+            'name' => $memberName,
+            'phone' => '12345678901234567890',
+            'birthday' => '1991/02/19',
+            'gender' => 'male',
+            'position' => 'junior',
+            'information' => $memberInfo
+        ];
+
+        $response = $this->postJson('api/members', $data);
+
+        $response->assertStatus(200)
+                ->assertJson([
+                    'data' => [
+                        'name' => $memberName,
+                        'information' => $memberInfo,
+                        'phone' => '12345678901234567890',
+                        'birthday' => '1991/02/19',
+                        'gender' => 'male',
+                        'position' => 'junior',
+                    ]
+                ]);
     }
 
     public function testInvalidTypingInputFieldNamePhoneAndBirthday()

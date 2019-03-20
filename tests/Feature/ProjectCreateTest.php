@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use Illuminate\Support\Str;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -57,14 +58,14 @@ class ProjectCreateTest extends TestCase
             ]);
     }
 
-    public function testExceedingLimitOfLengthInputFieldOfProject()
+    public function testExceedingLimitOfInputFieldNameInformationAndDeadlineOfProject()
     {
         $data = [
-            'name' => 'abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234a',
-            'information' => 'abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234a',
+            'name' => Str::random(11),
+            'information' => Str::random(301),
             'deadline' => '1958-02-19',
-            'type' => 'maleasd',
-            'status' => 'juniorasd',
+            'type' => 'lab',
+            'status' => 'doing',
         ];
 
         $response = $this->postJson('/api/projects', $data);
@@ -74,12 +75,37 @@ class ProjectCreateTest extends TestCase
                 'error' => [
                     'name' => ['The name may not be greater than 10 characters.'],
                     'information' => ['The information may not be greater than 300 characters.'],
-                    'type' => ['The selected type is invalid.'],
                     'deadline' => [
                         'The deadline does not match the format Y/m/d.',
                         'The deadline must be a date after today.'
                     ],
-                    'status' => ['The selected status is invalid.'],
+                ]
+            ]);
+    }
+
+    public function testSuccessfullyCreatingProjectWithLimitOfLengthOfInformationAndName()
+    {
+        $projectName = Str::random(10);
+        $projectInfo = Str::random(300);
+
+        $data = [
+            'name' => $projectName,
+            'information' => $projectInfo,
+            'deadline' => '2020/02/19',
+            'type' => 'lab',
+            'status' => 'doing',
+        ];
+
+        $response = $this->postJson('api/projects', $data);
+
+        $response->assertStatus(200)
+            ->assertJson([
+                'data' => [
+                    'name' => $projectName,
+                    'information' => $projectInfo,
+                    'deadline' => '2020/02/19',
+                    'type' => 'lab',
+                    'status' => 'doing'
                 ]
             ]);
     }
