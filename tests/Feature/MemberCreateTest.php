@@ -2,6 +2,8 @@
 
 namespace Tests\Feature;
 
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -138,5 +140,133 @@ class MemberCreateTest extends TestCase
                         'The birthday must be a date after 1959-01-01.'],
                 ]
             ]);
+    }
+
+    public function testSuccessfullyCreatingNewMemberWithJPGImage()
+    {
+
+        Storage::fake(config('filesystems.default'));
+
+        $data = [
+            'name' => 'hoang kenvin',
+            'phone' => '+84964 191 965',
+            'birthday' => '1991/02/19',
+            'gender' => 'male',
+            'position' => 'junior',
+            'avatar' => UploadedFile::fake()->image('avatar.jpg')
+        ];
+
+        $response = $this->postJson('/api/members', $data);
+
+        // Assert the file was stored...
+        Storage::disk(config('filesystems.default'))->assertExists(
+            'avatars/' . str_slug('hoang kenvin') . '.jpg'
+        );
+
+        $response->assertStatus(200);
+    }
+
+    public function testSuccessfullyCreatingNewMemberWithPNGImage()
+    {
+
+        Storage::fake(config('filesystems.default'));
+
+        $data = [
+            'name' => 'hoang kenvin',
+            'phone' => '+84964 191 965',
+            'birthday' => '1991/02/19',
+            'gender' => 'male',
+            'position' => 'junior',
+            'avatar' => UploadedFile::fake()->image('avatar.png')
+        ];
+
+        $response = $this->postJson('/api/members', $data);
+
+        // Assert the file was stored...
+        Storage::disk(config('filesystems.default'))->assertExists(
+            'avatars/' . str_slug('hoang kenvin') . '.png'
+        );
+
+        $response->assertStatus(200);
+    }
+
+    public function testSuccessfullyCreatingNewMemberWithGIFImage()
+    {
+
+        Storage::fake(config('filesystems.default'));
+
+        $data = [
+            'name' => 'hoang kenvin',
+            'phone' => '+84964 191 965',
+            'birthday' => '1991/02/19',
+            'gender' => 'male',
+            'position' => 'junior',
+            'avatar' => UploadedFile::fake()->image('avatar.gif')
+        ];
+
+        $response = $this->postJson('/api/members', $data);
+
+        // Assert the file was stored...
+        Storage::disk(config('filesystems.default'))->assertExists(
+            'avatars/' . str_slug('hoang kenvin') . '.gif'
+        );
+
+        $response->assertStatus(200);
+    }
+
+    public function testUploadImageBiggerThan10MBWhenCreatingNewMember()
+    {
+        $size = 10241;
+
+        Storage::fake(config('filesystems.default'));
+
+        $data = [
+            'name' => 'hoang kenvin',
+            'phone' => '+84964 191 965',
+            'birthday' => '1991/02/19',
+            'gender' => 'male',
+            'position' => 'junior',
+            'avatar' => UploadedFile::fake()->image('avatar.png')->size($size)
+        ];
+
+        $response = $this->postJson('/api/members', $data);
+
+        // // Assert a file does not exist..
+        Storage::disk(config('filesystems.default'))->assertMissing(
+            'avatars/' . str_slug('hoang kenvin') . '.png'
+        );
+
+        $response->assertStatus(422)
+                ->assertJson([
+                    'error' => [
+                        'avatar' => ['The avatar may not be greater than 10240 kilobytes.']
+                    ],
+                    'code' => 422
+                ]);
+    }
+
+    public function testUploadImageWithSize10MBWhenCreatingNewMember()
+    {
+        $size = 10240;
+
+        Storage::fake(config('filesystems.default'));
+
+        $data = [
+            'name' => 'hoang kenvin',
+            'phone' => '+84964 191 965',
+            'birthday' => '1991/02/19',
+            'gender' => 'male',
+            'position' => 'junior',
+            'avatar' => UploadedFile::fake()->create('image.png', $size)
+        ];
+
+        $response = $this->postJson('/api/members', $data);
+
+        // Assert a file does not exist..
+        Storage::disk(config('filesystems.default'))->assertExists(
+            'avatars/' . str_slug('hoang kenvin') . '.png'
+        );
+
+        $response->assertStatus(200);
     }
 }
