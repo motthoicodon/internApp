@@ -14,7 +14,7 @@ class MemberDeleteTest extends TestCase
      *
      * @return void
      */
-    public function test_successfully_removing_the_member()
+    public function testSuccessfullyRemovingTheMember()
     {
         $member = Member::create([
             'name'=> $this->faker->userName,
@@ -28,8 +28,10 @@ class MemberDeleteTest extends TestCase
 
         $response->assertStatus(200);
 
-        $response = $this->getJson("/api/members/{$member->id}");
+        $this->assertDatabaseMissing('members', ['id'=>$member->id]);
 
-        $response->assertStatus(404);
+        $uri = "/api/members/{$member->id}";
+
+        $this->return404WhenSendGetJsonRequest($uri);
     }
 }

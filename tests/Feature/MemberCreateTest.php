@@ -13,7 +13,7 @@ class MemberCreateTest extends TestCase
      *
      * @return void
      */
-    public function test_successfully_creating_a_new_member()
+    public function testSuccessfullyCreatingNewMember()
     {
         $data = [
             'name' => 'hoang.kenvin',
@@ -37,7 +37,7 @@ class MemberCreateTest extends TestCase
             ]);
     }
 
-    public function test_no_input_typing_when_create_a_new_member()
+    public function testNoInputTypingWhenCreateNewMember()
     {
         $data = [
             'name' => '',
@@ -61,7 +61,7 @@ class MemberCreateTest extends TestCase
             ]);
     }
 
-    public function test_exceeding_limit_of_length_input_field()
+    public function testExceedingLimitOfLengthInputField()
     {
         $data = [
             'name' => 'abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234a',
@@ -85,7 +85,7 @@ class MemberCreateTest extends TestCase
             ]);
     }
 
-    public function test_invalid_typing_input_field_name_phone_and_birthday()
+    public function testInvalidTypingInputFieldNamePhoneAndBirthday()
     {
         $data = [
             'name' => 'hoang@kenvin',

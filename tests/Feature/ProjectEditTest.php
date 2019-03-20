@@ -14,7 +14,7 @@ class ProjectEditTest extends TestCase
      *
      * @return void
      */
-    public function test_returns_the_updated_project_on_successfully_updating_the_project()
+    public function testReturnsTheUpdatedMemberOnSuccessfullyUpdatingTheProject()
     {
         $projects = factory(Project::class, 3)->create();
 
@@ -38,7 +38,7 @@ class ProjectEditTest extends TestCase
                 ]);
     }
 
-    public function test_it_returns_appropriate_field_validation_errors_when_updating_the_project_with_invalid_inputs()
+    public function testItReturnsAppropriateFieldValidationRrrorsWhenUpdatingTheProjectWithInvalidInputs()
     {
 
         $projects = factory(Project::class, 3)->create();

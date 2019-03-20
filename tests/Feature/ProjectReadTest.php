@@ -14,7 +14,7 @@ class ProjectReadTest extends TestCase
      *
      * @return void
      */
-    public function test_it_returns_an_empty_array_of_members_when_no_projects_exist()
+    public function testItReturnsAnEmptyArrayOfProjectsWhenNoProjectsExist()
     {
         $response = $this->getJson('/api/members');
 
@@ -24,7 +24,7 @@ class ProjectReadTest extends TestCase
             ]);
     }
 
-    public function test_can_list_projects()
+    public function testCanListProjects()
     {
 
         $projects = factory(Project::class, 2)->create();
@@ -50,7 +50,7 @@ class ProjectReadTest extends TestCase
             ]);
     }
 
-    public function test_can_get_project_specify_by_id()
+    public function testCanGetProjectSpecifyById()
     {
 
         $projects = factory(Project::class, 3)->create();

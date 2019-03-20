@@ -11,4 +11,10 @@ abstract class TestCase extends BaseTestCase
     use CreatesApplication;
     use WithFaker;
     use DatabaseMigrations;
+
+    protected function return404WhenSendGetJsonRequest($uri)
+    {
+        $response = $this->getJson($uri);
+        $response->assertStatus(404);
+    }
 }

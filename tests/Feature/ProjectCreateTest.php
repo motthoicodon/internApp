@@ -13,7 +13,7 @@ class ProjectCreateTest extends TestCase
      *
      * @return void
      */
-    public function test_successfully_creating_a_new_project()
+    public function testSuccessfullyCreatingNewProject()
     {
         $data = [
             'name' => 'ProJ 45',
@@ -35,7 +35,7 @@ class ProjectCreateTest extends TestCase
                 ]);
     }
 
-    public function test_no_input_typing_when_create_a_new_project()
+    public function testNoInputTypingWhenCreateNewProject()
     {
         $data = [
             'name' => '',
@@ -57,7 +57,7 @@ class ProjectCreateTest extends TestCase
             ]);
     }
 
-    public function test_exceeding_limit_of_length_input_field()
+    public function testExceedingLimitOfLengthInputField()
     {
         $data = [
             'name' => 'abcdef1234abcdef1234abcdef1234abcdef1234abcdef1234a',
@@ -84,7 +84,7 @@ class ProjectCreateTest extends TestCase
             ]);
     }
 
-    public function test_invalid_typing_input_field_name_type_and_status()
+    public function testInvalidTypingInputFieldNameTypeAndStatus()
     {
         $data = [
             'name' => 'abcd@',

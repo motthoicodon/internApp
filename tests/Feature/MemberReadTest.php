@@ -15,7 +15,7 @@ class MemberReadTest extends TestCase
      *
      * @return void
      */
-    public function test_it_returns_an_empty_array_of_members_when_no_members_exist()
+    public function testItReturnsAnEmptyArrayOfMembersWhenNoMembersExist()
     {
         $response = $this->getJson('/api/members');
 
@@ -25,7 +25,7 @@ class MemberReadTest extends TestCase
                 ]);
     }
 
-    public function test_can_list_members()
+    public function testCanListMembers()
     {
 
         $members = factory(Member::class, 2)->create();
@@ -51,7 +51,7 @@ class MemberReadTest extends TestCase
                  ]);
     }
 
-    public function test_can_get_member_specify_by_id()
+    public function testCanGetMemberSpecifyById()
     {
 
         $members = factory(Member::class, 3)->create();

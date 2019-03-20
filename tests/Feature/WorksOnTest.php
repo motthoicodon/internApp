@@ -15,7 +15,7 @@ class WorksOnTest extends TestCase
      *
      * @return void
      */
-    public function test_assign_successfully_members_to_projects()
+    public function testAssignSuccessfullyMembersToProjects()
     {
         $projects = factory(Project::class, 3)->create();
         $members = factory(Member::class, 3)->create();
@@ -39,7 +39,7 @@ class WorksOnTest extends TestCase
                 ]);
     }
 
-    public function test_assign_invalid_members_to_projects()
+    public function testAssignInvalidMembersToProjects()
     {
         $projects = factory(Project::class, 3)->create();
         $members = factory(Member::class, 3)->create();
@@ -61,7 +61,7 @@ class WorksOnTest extends TestCase
             ]);
     }
 
-    public function test_assign_members_to_projects_with_invalid_role()
+    public function testAssignMembersToProjectsWithInvalidRole()
     {
         $projects = factory(Project::class, 3)->create();
         $members = factory(Member::class, 3)->create();
@@ -83,7 +83,7 @@ class WorksOnTest extends TestCase
             ]);
     }
 
-    public function test_assign_members_to_invalid_projects()
+    public function testAssignMembersToInvalidProjects()
     {
         $projects = factory(Project::class, 3)->create();
         $members = factory(Member::class, 3)->create();
@@ -100,6 +100,28 @@ class WorksOnTest extends TestCase
         $response->assertStatus(404)
             ->assertJson([
                 'error' => 'Does not exists any Project with the specified indentificator',
+            ]);
+    }
+
+    public function testAssignDuplicateMemberToProjects()
+    {
+        $projects = factory(Project::class, 3)->create();
+        $members = factory(Member::class, 3)->create();
+
+        $project = $projects[0];
+
+        $data = [
+            'member_id' => $members[0]->id,
+            'role'      => 'pm',
+        ];
+
+        $response = $this->postJson("/api/projects/{$project->id}/members/", $data);
+        $response = $this->postJson("/api/projects/{$project->id}/members/", $data);
+
+        $response->assertStatus(422)
+            ->assertJson([
+                'error' => 'The member has been assigned into this project',
+                'code'=> 422
             ]);
     }
 }

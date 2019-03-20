@@ -14,7 +14,7 @@ class MemberEditTest extends TestCase
      *
      * @return void
      */
-    public function test_returns_the_updated_member_on_successfully_updating_the_member()
+    public function testReturnsTheUpdatedMemberOnSuccessfullyUpdatingTheMember()
     {
         $member = Member::create([
             'name'=> $this->faker->userName,
@@ -45,7 +45,7 @@ class MemberEditTest extends TestCase
                 ]);
     }
 
-    public function test_it_returns_appropriate_field_validation_errors_when_updating_the_member_with_invalid_inputs()
+    public function testItReturnsAppropriateFieldValidationRrrorsWhenUpdatingTheMemberWithInvalidInputs()
     {
 
         $member = Member::create([

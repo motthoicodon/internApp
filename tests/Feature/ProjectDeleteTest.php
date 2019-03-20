@@ -14,7 +14,7 @@ class ProjectDeleteTest extends TestCase
      *
      * @return void
      */
-    public function test_successfully_removing_the_project()
+    public function testSuccessfullyRemovingTheProject()
     {
         $projects = factory(Project::class, 3)->create();
 
@@ -24,8 +24,10 @@ class ProjectDeleteTest extends TestCase
 
         $response->assertStatus(200);
 
-        $response = $this->getJson("/api/projects/{$project->id}");
+        $this->assertDatabaseMissing('projects', ['id'=>$project->id]);
 
-        $response->assertStatus(404);
+        $uri = "/api/projects/{$project->id}";
+
+        $this->return404WhenSendGetJsonRequest($uri);
     }
 }
